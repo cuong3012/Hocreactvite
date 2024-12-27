@@ -1,6 +1,6 @@
 const TodoData = (props) => {
 
-    const { name, age, data } = props; //destructure
+    const { todoList } = props; //destructure
 
     //truyen function
 
@@ -10,11 +10,23 @@ const TodoData = (props) => {
 
     return (
         <div className='todo-data'>
-            <div>my name is {name}</div>
+            {todoList.map((item, index) => {
+                return (
+                    <div className="todo-item">
+                        <div>
+                            {item.name}
+                        </div>
+                        <div>
+                            <button>Delete</button>
+                        </div>
+
+                    </div>
+                )
+            }
+            )}
 
 
-            <div> Learn react</div>
-            <div> Watch youtube</div>
+
 
             <div>{JSON.stringify(props.todoList)}</div>
         </div>
