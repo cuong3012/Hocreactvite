@@ -14,14 +14,22 @@ const App = () => {
     country: "VN"
   };
 
+  //truyen function
+  const addNewTodo = (name) => {
+    alert(` Call me ${name} `)
+  }
+
   return (
     <div className="todo-container">
       <div className="todo-title"> Todo List</div>
-      <TodoNew></TodoNew>
+      <TodoNew
+        addNewTodo={addNewTodo} //truyen function khong co () 
+      />
       <TodoData
         name={name}
         age={age}
         data={data}
+
       />
       <div className='todo-image'></div>
 
