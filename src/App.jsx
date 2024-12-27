@@ -31,6 +31,18 @@ const App = () => {
     setTodoList([...todoList, newTodo])
     // alert(` Call me ${name} `)
   }
+
+
+  const deleteTodo = (id) => {
+
+
+
+    const newTodo = todoList.filter(item => item.id !== id)
+    console.log(">>>> Show Click delete ID", newTodo);
+    setTodoList(newTodo);
+
+
+  }
   const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -47,6 +59,7 @@ const App = () => {
         <>
           <TodoData
             todoList={todoList}
+            deleteTodo={deleteTodo}
 
           />
         </>

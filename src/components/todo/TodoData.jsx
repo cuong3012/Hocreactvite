@@ -1,8 +1,13 @@
 const TodoData = (props) => {
 
-    const { todoList } = props; //destructure
+    //const [idDelete, setIdeDelete] = useState("")
 
-    //truyen function
+    const { todoList, deleteTodo } = props; //destructure
+
+    const handleDeleteClick = (id) => {
+        console.log(">>>> Show Click delete ID", id)
+        deleteTodo(id)
+    }
 
 
 
@@ -17,7 +22,9 @@ const TodoData = (props) => {
                             {item.name}
                         </div>
                         <div>
-                            <button>Delete</button>
+                            <button
+                                onClick={(event) => handleDeleteClick(item.id)} //tham so dau vao
+                            >Delete</button>
                         </div>
 
                     </div>
@@ -28,7 +35,7 @@ const TodoData = (props) => {
 
 
 
-            <div>{JSON.stringify(props.todoList)}</div>
+
         </div>
     );
 }
