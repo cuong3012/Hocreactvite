@@ -2,7 +2,8 @@ import { Button, Descriptions, Input, message, Modal, notification } from "antd"
 import { useState } from "react";
 import axios from "axios";
 import { creteUserAPI } from "../../services/api.service";
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props
 
     const [fullName, setFullName] = useState("");
 
@@ -25,7 +26,8 @@ const UserForm = () => {
 
             })
 
-            setIsModalOpen(false)
+            resetAndCloseModal();
+            await loadUser();
         }
         else {
             notification.error({
@@ -34,8 +36,16 @@ const UserForm = () => {
                 description: JSON.stringify(res.message)
             })
         }
+    }
 
 
+    const resetAndCloseModal = () => {
+
+        setIsModalOpen(false);
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
 
     }
     return (
@@ -58,7 +68,7 @@ const UserForm = () => {
             <Modal title="Basic Modal"
                 open={isModalOpen}
                 onOk={() => { handleSubmitBtn() }}
-                onCancel={() => { setIsModalOpen(false) }}
+                onCancel={() => { resetAndCloseModal() }}
                 maskClosable={false}
                 okText={"Create"}
             >
