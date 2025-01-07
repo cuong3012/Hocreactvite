@@ -1,7 +1,7 @@
-import { Button, Input } from "antd";
+import { Button, Descriptions, Input, message, notification } from "antd";
 import { useState } from "react";
 import axios from "axios";
-
+import { creteUserAPI } from "../../services/api.service";
 const UserForm = () => {
 
     const [fullName, setFullName] = useState("");
@@ -10,19 +10,28 @@ const UserForm = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
 
-    const handleClickBtn = () => {
+
+    const handleClickBtn = async () => {
         // alert("click me");
 
-        const URL_BACKEND = "http://localhost:8080/api/v1/user";
-        const data = {
-            fullName: fullName,
-            email: email,
-            password: password,
-            phone: phone
+        const res = await creteUserAPI(fullName, email, password, phone)
+
+        if (res.data) {
+            notification.success({
+                message: "Create user",
+                description: "Taoj user thanh cong Hiểu và Làm Chủ"
+            })
+        }
+        else {
+            notification.error({
+                message: "Error Create user",
+                // description: "Taoj user khong thanh cong Hiểu và Làm Chủ"
+                description: JSON.stringify(res.message)
+            })
         }
 
-        axios.post(URL_BACKEND, data)
-        console.log("Check stage ", { fullName, email, password, phone })
+
+        console.log("Check stage ", res.data)
     }
     return (
         <>
